@@ -1,0 +1,107 @@
+Latrobe - Gippsland
+Western Australia - Outback (South)
+Sydney - City and Inner South
+Sydney - Inner South West
+Hunter Valley exc Newcastle
+Special Purpose Codes (SA4) (SA)
+Perth - North West
+Hobart
+Central Coast
+Perth - North East
+Brisbane Inner City
+Melbourne - North East
+Illawarra
+Migratory - Offshore - Shipping (NT)
+South East
+Special Purpose Codes SA4 (NSW)
+Geelong
+Perth - South East
+Bendigo
+Gold Coast
+Launceston and North East
+Sydney - North Sydney and Hornsby
+Riverina
+Melbourne - Inner
+South Australia - South East
+Migratory - Offshore - Shipping (WA)
+Special Purpose Codes (SA4) (OT)
+Sydney - Eastern Suburbs
+Special Purpose Codes (SA4) (Tas.)
+Sydney - Parramatta
+Adelaide - West
+Moreton Bay - North
+Shepparton
+Wide Bay
+Adelaide - North
+Brisbane - South
+Special Purpose Codes (SA4) (Vic.)
+Western Australia - Outback (North)
+Sydney - Ryde
+North West
+Ballarat
+Sydney - Inner West
+Cairns
+Southern Highlands and Shoalhaven
+Mid North Coast
+Darwin
+Brisbane - West
+Moreton Bay - South
+South Australia - Outback
+Special Purpose Codes (SA4) (Qld)
+Murray
+Sydney - Baulkham Hills and Hawkesbury
+Sydney - Northern Beaches
+Perth - South West
+Warrnambool and South West
+Sydney - South West
+Sunshine Coast
+Mackay - Isaac - Whitsunday
+Migratory - Offshore - Shipping (OT)
+Central West
+Migratory - Offshore - Shipping (ACT)
+Melbourne - West
+Richmond - Tweed
+Sydney - Blacktown
+Mandurah
+Hume
+Western Australia - Wheat Belt
+Brisbane - East
+Bunbury
+Migratory - Offshore - Shipping (Tas.)
+Adelaide - Central and Hills
+Darling Downs - Maranoa
+Special Purpose Codes (SA4) (NT)
+Melbourne - South East
+Migratory - Offshore - Shipping (Qld)
+Adelaide - South
+Melbourne - North West
+Sydney - Outer South West
+New England and North West
+Migratory - Offshore - Shipping (Vic.)
+Townsville
+Sydney - Outer West and Blue Mountains
+Australian Capital Territory
+Toowoomba
+Brisbane - North
+Sydney - Sutherland
+Capital Region
+Far West and Orana
+Special Purpose Codes (SA4) (ACT)
+Logan - Beaudesert
+Mornington Peninsula
+West and North West
+Migratory - Offshore - Shipping (NSW)
+Melbourne - Inner East
+Newcastle and Lake Macquarie
+Melbourne - Outer East
+Central Queensland
+Migratory - Offshore - Shipping (SA)
+Barossa - Yorke - Mid North
+Special Purpose Codes (SA4) (WA)
+Melbourne - Inner South
+Ipswich
+Other Territories
+Coffs Harbour - Grafton
+Queensland - Outback
+Perth - Inner
+Northern Territory - Outback
