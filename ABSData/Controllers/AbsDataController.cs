@@ -3,25 +3,27 @@ using ABSDataFramework.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 
 namespace ABSData.Controllers
 {
-    [Route("/api/[controller]")]
+    [Produces(MediaTypeNames.Application.Json)]
+    [Route("api/[controller]")]
     [ApiController]
-    public class AbsDataController : ControllerBase
+    public class AbsDatController : ControllerBase
     {
         private IABSDataService _dataService;
 
-        public AbsDataController(IABSDataService dataService) {
+        public AbsDatController(IABSDataService dataService) {
             _dataService = dataService;
         }
 
         [HttpGet]
-        [Route("/api/age-structure/{id/{id}}")]
-        public async Task<ActionResult> GetData(int region, int sex)
+        [Route("/api/age-structure/{regionId}/{sexId}")]
+        public async Task<ActionResult> GetData([FromRoute(Name = "regionId")] int regionId, int sexId)
         {
-            var data = (await _dataService.GetDataByRegionIdAndSexIdAsync(region, sex)).ToList();
+            var data = (await _dataService.GetDataByRegionIdAndSexIdAsync(regionId, sexId)).ToList();
 
             List<PopulationData> lst = new List<PopulationData>();
 
