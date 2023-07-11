@@ -1,10 +1,6 @@
 ﻿using ABSDataFramework.Interfaces;
 using ABSDataFramework.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
