@@ -6,9 +6,9 @@ namespace ABSDataFramework.Interfaces
 {
     public interface IABSDataService
     {
-        Task<IEnumerable<PopulationData>> GetDataByRegionIdAndSexIdAsync(int regionCode, int sexId);
+        Task<PopulationData> GetDataByRegionIdAndSexIdAsync(int regionCode, int sexId);
 
-        Task<IEnumerable<PopulationData>> GetDataByRegionIdAndSexIdDiffAsync(int regionCode,
+        Task<IEnumerable<FactPopulation>> GetDataByRegionIdAndSexIdDiffAsync(int regionCode,
             int sexId, int year1, int year2);
     }
 }

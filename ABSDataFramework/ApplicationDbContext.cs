@@ -11,7 +11,7 @@ namespace ABSDataFramework
 
         }
 
-        public DbSet<PopulationData> FactPopulation { get; set; }
+        public DbSet<FactPopulation> FactPopulation { get; set; }
 
         public DbSet<Sex> DimSex { get; set; }
 

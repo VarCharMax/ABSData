@@ -1,8 +1,10 @@
 ﻿using ABSDataFramework.Interfaces;
 using ABSDataFramework.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,21 +19,39 @@ namespace ABSDataFramework.Services
             dbContext = _db;
         }
 
-        public async Task<IEnumerable<PopulationData>> GetDataByRegionIdAndSexIdAsync(int regionCode, int sexId)
+        public async Task<PopulationData> GetDataByRegionIdAndSexIdAsync(int regionCode, int sexId)
         {
+            PopulationData pData = null;
+
             var dataList = await dbContext.FactPopulation
-                .Where(f => f.Region.ABSRegionId == regionCode 
+                .Where(f => f.Region.ABSRegionId == regionCode
                 && f.Sex.ABSSexId == sexId)
                 .Include(d => d.Sex)
                 .Include(d => d.AgeCode)
                 .Include(d => d.Region)
-                .Include(d => d.State)
                 .ToListAsync();
 
-            return dataList;
+            if (dataList.Count > 0)
+            {
+                var dataRow = dataList.FirstOrDefault();
+
+                var popList = dataList.GroupBy(g => g.AgeCode.name, g => g.AgeCode,
+                (baseAge, ages) => new DataList
+                {
+                    Age = baseAge,
+                    Population = ages.Count(),
+                    CensusYear = dataRow.CensusYear,
+                    Sex = dataRow.Sex.name
+                }).ToList();
+
+                pData = new PopulationData() { RegionCode = dataRow.Region.ABSRegionId, 
+                    RegionName = dataRow.Region.name, Data = popList };
+            }
+
+            return pData;
         }
 
-        public async Task<IEnumerable<PopulationData>> GetDataByRegionIdAndSexIdDiffAsync(int regionCode, 
+        public async Task<IEnumerable<FactPopulation>> GetDataByRegionIdAndSexIdDiffAsync(int regionCode, 
             int sexId, int year1, int year2)
         {
             var dataList = await dbContext.FactPopulation
@@ -41,7 +61,6 @@ namespace ABSDataFramework.Services
                 .Include(d => d.AgeCode)
                 .Include(d => d.Region)
                 .Include(d => d.State)
-                .Where()
                 .ToListAsync();
 
             return dataList;

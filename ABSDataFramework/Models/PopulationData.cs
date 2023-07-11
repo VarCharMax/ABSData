@@ -1,28 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
 namespace ABSDataFramework.Models
 {
     public class PopulationData
     {
-        [Key]
-        public long id { get; set; }
+        public int RegionCode { get; set; }
 
-        public Sex Sex { get; set; }
+        public string RegionName { get; set; }
 
-        public Age AgeCode { get; set; }
+        public List<DataList> Data { get; set; } = new List<DataList>();
+    }
 
-        public DimState State { get; set; }
+    public class DataList
+    {
+        public string Age { get; set; }
 
-        public string RegionType { get; set; }
-
-        public string GeographyLevel { get; set; }
-
-        public Region Region { get; set; }
-
-        public int Time { get; set; }
+        public string Sex { get; set; }
 
         public int CensusYear { get; set; }
 
-        public int Value { get; set; }
+        public int Population { get; set; }
     }
 }
