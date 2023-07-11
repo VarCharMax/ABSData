@@ -2,24 +2,22 @@
 
 namespace ABSDataFramework.Models
 {
-    public class abs_data
+    public class PopulationData
     {
         [Key]
         public long id { get; set; }
 
-        public sex_abs Sex { get; set; }
+        public Sex Sex { get; set; }
 
-        public string AgeCode { get; set; }
+        public Age AgeCode { get; set; }
 
-        public string Age { get; set; }
-
-        public state State { get; set; }
+        public DimState State { get; set; }
 
         public string RegionType { get; set; }
 
         public string GeographyLevel { get; set; }
 
-        public region Region { get; set; }
+        public Region Region { get; set; }
 
         public int Time { get; set; }
 

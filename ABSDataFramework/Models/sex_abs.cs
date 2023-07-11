@@ -2,7 +2,7 @@
 
 namespace ABSDataFramework.Models
 {
-    public class sex_abs
+    public class Sex
     {
         [Key]
         public long id { get; set; }

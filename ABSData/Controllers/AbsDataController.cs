@@ -21,7 +21,7 @@ namespace ABSData.Controllers
         [Route("/api/getdata")]
         public async Task<ActionResult<IEnumerable<abs_data>>> GetData() {
 
-            return Ok(await _context.AbsData.ToListAsync());
+            return Ok(await _context.FactPopulation.ToListAsync());
         }
     }
 }

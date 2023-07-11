@@ -2,13 +2,13 @@
 
 namespace ABSDataFramework.Models
 {
-    public class DimState
+    public class Age
     {
         [Key]
         public long id { get; set; }
 
         public string name { get; set; }
 
-        public int ABSStateId { get; set; }
+        public int ABSAgeId { get; set; }
     }
 }

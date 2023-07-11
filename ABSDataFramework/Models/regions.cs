@@ -2,7 +2,7 @@
 
 namespace ABSDataFramework.Models
 {
-    public class region
+    public class Region
     {
         [Key]
         public long id { get; set; }

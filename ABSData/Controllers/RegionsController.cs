@@ -23,7 +23,7 @@ namespace ABSData.Controllers
         public async Task<ActionResult<IEnumerable<region>>> GetData()
         {
 
-            return Ok(await _context.Regions.ToListAsync());
+            return Ok(await _context.DimRegion.ToListAsync());
         }
     }
 }

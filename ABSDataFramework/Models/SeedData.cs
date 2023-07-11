@@ -10,6 +10,7 @@ namespace ABSDataFramework
         {
             context.Database.Migrate();
 
+            /*
             if (context.States.Count() == 0)
             {
                 context.States.AddRange(
@@ -24,6 +25,7 @@ namespace ABSDataFramework
                         new state { name = "Other Territories" }
                     );
             }
+            */
 
             /*
             if (context.Sexes.Count() == 0)

@@ -19,18 +19,51 @@ namespace ABSData.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ABSDataFramework.Models.abs_data", b =>
+            modelBuilder.Entity("ABSDataFramework.Models.Age", b =>
                 {
                     b.Property<long>("id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Age")
+                    b.Property<int>("ABSAgeId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("AgeCode")
+                    b.HasKey("id");
+
+                    b.ToTable("DimAge");
+                });
+
+            modelBuilder.Entity("ABSDataFramework.Models.DimState", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ABSStateId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("name")
                         .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.ToTable("DimState");
+                });
+
+            modelBuilder.Entity("ABSDataFramework.Models.PopulationData", b =>
+                {
+                    b.Property<long>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<long?>("AgeCodeid")
+                        .HasColumnType("bigint");
 
                     b.Property<int>("CensusYear")
                         .HasColumnType("int");
@@ -58,16 +91,18 @@ namespace ABSData.Migrations
 
                     b.HasKey("id");
 
+                    b.HasIndex("AgeCodeid");
+
                     b.HasIndex("Regionid");
 
                     b.HasIndex("Sexid");
 
                     b.HasIndex("Stateid");
 
-                    b.ToTable("AbsData");
+                    b.ToTable("FactPopulation");
                 });
 
-            modelBuilder.Entity("ABSDataFramework.Models.region", b =>
+            modelBuilder.Entity("ABSDataFramework.Models.Region", b =>
                 {
                     b.Property<long>("id")
                         .ValueGeneratedOnAdd()
@@ -82,10 +117,10 @@ namespace ABSData.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Regions");
+                    b.ToTable("DimRegion");
                 });
 
-            modelBuilder.Entity("ABSDataFramework.Models.sex_abs", b =>
+            modelBuilder.Entity("ABSDataFramework.Models.Sex", b =>
                 {
                     b.Property<long>("id")
                         .ValueGeneratedOnAdd()
@@ -100,35 +135,24 @@ namespace ABSData.Migrations
 
                     b.HasKey("id");
 
-                    b.ToTable("Sexes");
+                    b.ToTable("DimSex");
                 });
 
-            modelBuilder.Entity("ABSDataFramework.Models.state", b =>
+            modelBuilder.Entity("ABSDataFramework.Models.PopulationData", b =>
                 {
-                    b.Property<long>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.HasOne("ABSDataFramework.Models.Age", "AgeCode")
+                        .WithMany()
+                        .HasForeignKey("AgeCodeid");
 
-                    b.Property<string>("name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("States");
-                });
-
-            modelBuilder.Entity("ABSDataFramework.Models.abs_data", b =>
-                {
-                    b.HasOne("ABSDataFramework.Models.region", "Region")
+                    b.HasOne("ABSDataFramework.Models.Region", "Region")
                         .WithMany()
                         .HasForeignKey("Regionid");
 
-                    b.HasOne("ABSDataFramework.Models.sex_abs", "Sex")
+                    b.HasOne("ABSDataFramework.Models.Sex", "Sex")
                         .WithMany()
                         .HasForeignKey("Sexid");
 
-                    b.HasOne("ABSDataFramework.Models.state", "State")
+                    b.HasOne("ABSDataFramework.Models.DimState", "State")
                         .WithMany()
                         .HasForeignKey("Stateid");
                 });

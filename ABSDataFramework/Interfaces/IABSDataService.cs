@@ -5,8 +5,8 @@ namespace ABSDataFramework.Interfaces
 {
     public interface IABSDataService
     {
-        IEnumerable<abs_data> GetDataByRegion(int regionCode);
+        IEnumerable<PopulationData> GetDataByRegion(int regionCode);
 
-        IEnumerable<abs_data> GetDataByRegionIdAndSexId(int regionCode, int sexId);
+        IEnumerable<PopulationData> GetDataByRegionIdAndSexId(int regionCode, int sexId);
     }
 }

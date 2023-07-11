@@ -15,12 +15,12 @@ namespace ABSDataFramework.Services
             dbContext = _db;
         }
 
-        public IEnumerable<abs_data> GetDataByRegion(int regionCode)
+        public IEnumerable<PopulationData> GetDataByRegion(int regionCode)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<abs_data> GetDataByRegionIdAndSexId(int regionCode, int sexId)
+        public IEnumerable<PopulationData> GetDataByRegionIdAndSexId(int regionCode, int sexId)
         {
             throw new NotImplementedException();
         }

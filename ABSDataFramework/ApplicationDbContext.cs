@@ -11,13 +11,15 @@ namespace ABSDataFramework
 
         }
 
-        public DbSet<abs_data> AbsData { get; set; }
+        public DbSet<PopulationData> FactPopulation { get; set; }
 
-        public DbSet<sex_abs> Sexes { get; set; }
+        public DbSet<Sex> DimSex { get; set; }
 
-        public DbSet<region> Regions { get; set; }
+        public DbSet<Region> DimRegion { get; set; }
 
-        public DbSet<state> States { get; set; }
+        public DbSet<DimState> DimState { get; set; }
+
+        public DbSet<Age> DimAge { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
