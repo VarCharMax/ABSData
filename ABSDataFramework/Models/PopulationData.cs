@@ -11,6 +11,11 @@ namespace ABSDataFramework.Models
         public List<DataList> Data { get; set; }
     }
 
+    public class PopulationDataCensus: PopulationData
+    {
+        public string CensusYear { get; set; }
+    }
+
     public class DataList
     {
         public string Age { get; set; }

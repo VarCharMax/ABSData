@@ -8,7 +8,7 @@ namespace ABSDataFramework.Interfaces
     {
         Task<PopulationData> GetDataByRegionIdAndSexIdAsync(int regionCode, int sexId);
 
-        Task<IEnumerable<FactPopulation>> GetDataByRegionIdAndSexIdDiffAsync(int regionCode,
+        Task<PopulationDataCensus> GetDataByRegionIdAndSexIdDiffAsync(int regionCode,
             int sexId, int year1, int year2);
     }
 }

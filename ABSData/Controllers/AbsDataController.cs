@@ -29,28 +29,12 @@ namespace ABSData.Controllers
         }
 
         [HttpGet]
-        [Route("/api/age-structure/{regionId}/{sexId}/year1/year2")]
+        [Route("/api/age-structure-diff/{regionId}/{sexId}/{year1}/{year2}")]
         public async Task<ActionResult> GetData(int regionId, int sexId, int year1, int year2)
         {
-            var data = (await _dataService.GetDataByRegionIdAndSexIdDiffAsync(regionId, sexId, year1, year2)).ToList();
+            var data = (await _dataService.GetDataByRegionIdAndSexIdDiffAsync(regionId, sexId, year1, year2));
 
-            List<PopulationData> lst = new List<PopulationData>();
-
-            data.ForEach(d =>
-            {
-                var pData = new PopulationData
-                {
-                    Age = d.AgeCode.name,
-                    Sex = d.Sex.name,
-                    Region = d.Region.name,
-                    CensusYear = d.CensusYear,
-                    RegionType = d.RegionType,
-                };
-
-                lst.Add(pData);
-            });
-
-            return Ok(lst);
+            return Ok(data);
         }
     }
 }
