@@ -25,6 +25,7 @@ namespace ABSDataFramework
                     );
             }
 
+            /*
             if (context.Sexes.Count() == 0)
             {
                 context.Sexes.AddRange(
@@ -33,6 +34,7 @@ namespace ABSDataFramework
                     new sex_abs { name = "Persons" }
                     );
             }
+            */
 
             context.SaveChanges();
         }

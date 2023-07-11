@@ -44,11 +44,12 @@ dfn =  df.astype(convert_dict)
 # sets are used because the values are unique
 # the map is to ensure that the datatypes of both sets are exactly the same - not wrapped in another datatype.
 data_regions_new = set(map(int, dfn.loc[:,"ASGS_2016"]))
+data_sexes_new = set(map(int, dfn.loc[:,"SEX_ABS"]))
 
 # convert DataFrame to list of dictionaries
 dict_records_list = dfn.to_dict(orient='records')
 
-# create look-up list for regions by id
+# create look-up list for regions by ASGS_2016 id
 dict_regions = {}
 set_regions = set()
 
@@ -58,11 +59,22 @@ for d in dict_records_list:
         set_regions.add(d['ASGS_2016'])
         dict_regions[d['ASGS_2016']] = d['Region']
 
+dict_sexes = {}
+set_sexes = set()
+
+# create look-up list of sexes by SEX_ABS id
+for d in dict_records_list:
+    if d['SEX_ABS'] not in set_sexes:
+        # used to exclude duplicates
+        set_sexes.add(d['SEX_ABS'])
+        dict_sexes[d['SEX_ABS']] = d['Sex']
+
 # DB tasks
 
 cnxn = pyodbc.connect('DRIVER={Devart ODBC Driver for SQL Server};Data Source=DESKTOP-5VQLKUC;Initial Catalog=abs_stats;User ID=stats;Password=MyNewStrongPwd1@')
 cursor = cnxn.cursor()
 
+# update regions table with any new regions in data set
 # get all region ids in db as set
 cursor.execute("SELECT ABSRegionId FROM regions") 
 regions_db_set = set([row.ABSRegionId for row in cursor.fetchall()])
@@ -80,6 +92,24 @@ if (len(regions_new_set) > 0):
         # get region name from look-up list
         name = dict_regions[region]
         insert_string = "{}'{}',{}{}".format("INSERT INTO regions(name, ABSRegionId) VALUES (", name, id,");")
+        cursor.execute(insert_string)
+
+cnxn.commit()
+
+# update sexes table with any new sexes in data set
+
+cursor.execute("SELECT ABSSexId FROM Sexes") 
+sexes_db_set = set([row.ABSSexId for row in cursor.fetchall()])
+
+sexes_db_set = set(map(int, sexes_db_set))
+sexes_new_set = data_sexes_new.difference(sexes_db_set)
+
+if (len(sexes_new_set) > 0):    
+    for sex in sexes_new_set:
+        id = sex
+        # get sex name from look-up list
+        name = dict_sexes[sex]
+        insert_string = "{}'{}',{}{}".format("INSERT INTO Sexes(name, ABSSexId) VALUES (", name, id,");")
         cursor.execute(insert_string)
 
 cnxn.commit()
