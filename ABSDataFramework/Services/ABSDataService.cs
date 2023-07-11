@@ -47,7 +47,6 @@ namespace ABSDataFramework.Services
                     RegionName = dataRow.Region.name, Data = popList };
             }
 
-
             return pData;
         }
 
