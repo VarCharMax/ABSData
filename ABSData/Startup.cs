@@ -1,4 +1,5 @@
 using ABSDataFramework;
+using ABSDataFramework.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using ABSDataFramework.Services;
 using System;
 
 namespace ABSData
@@ -25,6 +27,8 @@ namespace ABSData
                 Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString, b => b.MigrationsAssembly("ABSData")));
+
+            services.AddTransient<IABSDataService, ABSDataService>();
 
             services.AddControllersWithViews()
                 .AddJsonOptions(opts => {

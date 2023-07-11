@@ -1,12 +1,14 @@
 ﻿using ABSDataFramework.Interfaces;
 using ABSDataFramework.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace ABSDataFramework.Services
 {
-    internal class ABSDataService : IABSDataService
+    public class ABSDataService : IABSDataService
     {
         ApplicationDbContext dbContext;
 
@@ -15,14 +17,19 @@ namespace ABSDataFramework.Services
             dbContext = _db;
         }
 
-        public IEnumerable<PopulationData> GetDataByRegion(int regionCode)
+        /*
+        public Task<IEnumerable<PopulationData>> GetDataByRegionAsync(int regionCode)
         {
             throw new NotImplementedException();
         }
+        */
 
-        public IEnumerable<PopulationData> GetDataByRegionIdAndSexId(int regionCode, int sexId)
+        public async Task<IEnumerable<PopulationData>> GetDataByRegionIdAndSexIdAsync(int regionCode, int sexId)
         {
-            throw new NotImplementedException();
+            var dataList = await dbContext.FactPopulation
+                .Where(f => f.Region.ABSRegionId == regionCode && f.Sex.ABSSexId == sexId).ToListAsync();
+
+            return dataList;
         }
     }
 }
