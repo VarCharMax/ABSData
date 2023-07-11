@@ -8,7 +8,7 @@ namespace ABSDataFramework.Models
 
         public string RegionName { get; set; }
 
-        public List<DataList> Data { get; set; } = new List<DataList>();
+        public List<DataList> Data { get; set; }
     }
 
     public class DataList
@@ -16,8 +16,6 @@ namespace ABSDataFramework.Models
         public string Age { get; set; }
 
         public string Sex { get; set; }
-
-        public int CensusYear { get; set; }
 
         public int Population { get; set; }
     }

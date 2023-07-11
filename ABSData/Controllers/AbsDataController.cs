@@ -25,28 +25,6 @@ namespace ABSData.Controllers
         {
             var data = (await _dataService.GetDataByRegionIdAndSexIdAsync(regionId, sexId));
 
-            /*
-            List<PopulationData> lst = new List<PopulationData>();
-
-            data.ForEach(d =>
-            {
-                var pData = new PopulationData
-                {
-                    Age = d.AgeCode.name,
-                    Sex = d.Sex.name,
-                    Region = d.Region.name,
-                    State = d.State.name,
-                    CensusYear = d.CensusYear,
-                    GeographyLevel = d.GeographyLevel,
-                    RegionType = d.RegionType,
-                    Time = d.Time,
-                    Value = d.Value
-                };
-
-                lst.Add(pData);
-            });
-            */
-
             return Ok(data);
         }
 

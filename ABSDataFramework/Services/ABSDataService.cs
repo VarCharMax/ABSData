@@ -40,13 +40,13 @@ namespace ABSDataFramework.Services
                 {
                     Age = baseAge,
                     Population = ages.Count(),
-                    CensusYear = dataRow.CensusYear,
                     Sex = dataRow.Sex.name
                 }).ToList();
 
                 pData = new PopulationData() { RegionCode = dataRow.Region.ABSRegionId, 
                     RegionName = dataRow.Region.name, Data = popList };
             }
+
 
             return pData;
         }
