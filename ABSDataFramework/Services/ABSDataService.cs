@@ -27,7 +27,13 @@ namespace ABSDataFramework.Services
         public async Task<IEnumerable<PopulationData>> GetDataByRegionIdAndSexIdAsync(int regionCode, int sexId)
         {
             var dataList = await dbContext.FactPopulation
-                .Where(f => f.Region.ABSRegionId == regionCode && f.Sex.ABSSexId == sexId).ToListAsync();
+                .Where(f => f.Region.ABSRegionId == regionCode 
+                && f.Sex.ABSSexId == sexId)
+                .Include(d => d.Sex)
+                .Include(d => d.AgeCode)
+                .Include(d => d.Region)
+                .Include(d => d.State)
+                .ToListAsync();
 
             return dataList;
         }
