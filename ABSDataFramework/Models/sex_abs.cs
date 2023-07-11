@@ -8,5 +8,7 @@ namespace ABSDataFramework.Models
         public long id { get; set; }
 
         public string name { get; set; }
+
+        public int ABSSexId { get; set; }
     }
 }

@@ -27,7 +27,7 @@ convert_dict = {'SEX_ABS': int,
                 'State': str,
                 'REGIONTYPE': str,
                 'Geography Level': str,
-                'ASGS_2016': str,
+                'ASGS_2016': int,
                 'Region': str,
                 'TIME': int,
                 'Census year': int,
@@ -40,33 +40,47 @@ dfn =  df.astype(convert_dict)
 # this should do it automatically according to the documentation, but it isn't working.
 # dfn = df.convert_dtypes()
 
-# get set of all regions in new data
+# get set of all regions by code in new data
 # sets are used because the values are unique
 # the map is to ensure that the datatypes of both sets are exactly the same - not wrapped in another datatype.
-data_regions_new = set(map(str, dfn.loc[:,"Region"]))
+data_regions_new = set(map(int, dfn.loc[:,"ASGS_2016"]))
 
 # convert DataFrame to list of dictionaries
-dict_records = dfn.to_dict(orient='records')
+dict_records_list = dfn.to_dict(orient='records')
+
+# create look-up list for regions by id
+dict_regions = {}
+set_regions = set()
+
+for d in dict_records_list:
+    if d['ASGS_2016'] not in set_regions:
+        # used to exclude duplicates
+        set_regions.add(d['ASGS_2016'])
+        dict_regions[d['ASGS_2016']] = d['Region']
 
 # DB tasks
 
 cnxn = pyodbc.connect('DRIVER={Devart ODBC Driver for SQL Server};Data Source=DESKTOP-5VQLKUC;Initial Catalog=abs_stats;User ID=stats;Password=MyNewStrongPwd1@')
 cursor = cnxn.cursor()
 
-# get all regions in db as set
-cursor.execute("SELECT name FROM regions") 
-regions_db_set = set([row.name for row in cursor.fetchall()])
+# get all region ids in db as set
+cursor.execute("SELECT ABSRegionId FROM regions") 
+regions_db_set = set([row.ABSRegionId for row in cursor.fetchall()])
 
-# ensure that set values are strings and not wrapped in some unexpected datatype
-regions_db_set = set(map(str, regions_db_set))
+# ensure that set values are ints and not wrapped in some unexpected datatype
+regions_db_set = set(map(int, regions_db_set))
 
-# intersect with new region data to find regions not currently in db.
+# intersect with new region ids to find regions not currently in db.
 regions_new_set = data_regions_new.difference(regions_db_set)
 
 # insert any new regions into db
-if (len(regions_new_set) > 0):
+if (len(regions_new_set) > 0):    
     for region in regions_new_set:
-        cursor.execute('{}{}{}'.format("INSERT INTO regions(name) VALUES ('", region, "');"))
+        id = region
+        # get region name from look-up list
+        name = dict_regions[region]
+        insert_string = "{}'{}',{}{}".format("INSERT INTO regions(name, ABSRegionId) VALUES (", name, id,");")
+        cursor.execute(insert_string)
 
 cnxn.commit()
 
@@ -95,16 +109,17 @@ for row in result.fetchall():
     dict_states[row.name] = row.id
 
 # replace sex, region, state in new data dictionary with corresponding fk in relational tables
-for data in dict_records:
+for data in dict_records_list:
     data['Sex'] = dict_sexes[data['Sex']]
     data['Region'] = dict_regions[data['Region']]
     data['State'] = dict_states[data['State']]
 
-insert_string_template = "INSERT INTO AbsData (Sexid, AgeCode, Age, Stateid, RegionType, GeographyLevel, ASGS_2016, Regionid, Time, CensusYear, Value) VALUES ("
+insert_string_template = "INSERT INTO AbsData (Sexid, AgeCode, Age, Stateid, RegionType, GeographyLevel, Regionid, Time, CensusYear, Value) VALUES ("
 
-for row in dict_records:
-    insert_string = "{}{},'{}','{}',{},'{}','{}',{},{},{},{},{}{}".format(insert_string_template, row["Sex"], row["AGE"], row["Age"], row["State"], 
-        row["REGIONTYPE"], row["Geography Level"], row["ASGS_2016"], row["Region"], row["TIME"], row["Census year"], row["Value"], ");")
+for row in dict_records_list:
+    insert_string = "{}{},'{}','{}',{},'{}','{}',{},{},{},{}{}".format(insert_string_template, row["Sex"], row["AGE"], row["Age"], row["State"], 
+        row["REGIONTYPE"], row["Geography Level"], row["Region"], row["TIME"], row["Census year"], row["Value"], ");")
+    # print(insert_string)
     cursor.execute(insert_string) 
 
 cnxn.commit()

@@ -19,8 +19,6 @@ namespace ABSDataFramework.Models
 
         public string GeographyLevel { get; set; }
 
-        public string ASGS_2016 { get; set; }
-
         public region Region { get; set; }
 
         public int Time { get; set; }
