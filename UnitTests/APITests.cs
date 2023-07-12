@@ -20,7 +20,9 @@ namespace UnitTests
 
             var controller = new AbsDataController(mockService.Object);
 
-            var model = (await controller.GetData(104, 1) as ViewResult)?.ViewData.Model as PopulationData;
+            var model = (await controller.GetData(104, 1) as ActionResult);
+
+            Assert.NotNull(model);
         }
 
     }
