@@ -10,15 +10,16 @@ namespace ABSData.Controllers
     [Produces(MediaTypeNames.Application.Json)]
     [Route("api/[controller]")]
     [ApiController]
-    public class AbsDatController : ControllerBase
+    public class AbsDataController : ControllerBase
     {
         private IABSDataService _dataService;
 
-        public AbsDatController(IABSDataService dataService) {
+        public AbsDataController(IABSDataService dataService) {
             _dataService = dataService;
         }
 
         [HttpGet]
+        [Produces("application/json")]
         [Route("/api/age-structure/{regionId}/{sexId}")]
         public async Task<ActionResult> GetData(int regionId, int sexId)
         {
@@ -49,6 +50,7 @@ namespace ABSData.Controllers
         }
 
         [HttpGet]
+        [Produces("application/json")]
         [Route("/api/age-structure-diff/{regionId}/{sexId}/{year1}/{year2}")]
         public async Task<ActionResult> GetData(int regionId, int sexId, int year1, int year2)
         {
