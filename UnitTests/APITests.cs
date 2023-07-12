@@ -3,7 +3,9 @@ using ABSDataFramework.Interfaces;
 using ABSDataFramework.Models;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -20,9 +22,13 @@ namespace UnitTests
 
             var controller = new AbsDataController(mockService.Object);
 
-            var model = (await controller.GetData(104, 1) as ActionResult);
-
+            var model = await controller.GetData(104, 1) as OkObjectResult;
+            
             Assert.NotNull(model);
+
+            var result = model.Value as PopulationData;
+
+            Assert.NotNull(result);
         }
 
     }
