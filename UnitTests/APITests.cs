@@ -12,15 +12,15 @@ namespace UnitTests
     public class APITests
     {
         [Fact]
-        public void APIReturnsData()
+        public async Task APIReturnsDataAsync()
         {
-            var mock = new Mock<IABSDataService>();
+            var mockService = new Mock<IABSDataService>();
 
-            var myType = mock.SetupGet(p => p.GetDataByRegionIdAndSexIdAsync(104, 1)).Returns(Task.FromResult(new PopulationData { RegionCode = 104, RegionName = "West Coast" }));
+            var myType = mockService.Setup(p => p.GetDataByRegionIdAndSexIdAsync(104, 1)).Returns(Task.FromResult(new PopulationData { RegionCode = 104, RegionName = "West Coast" }));
 
-            var controller = new AbsDataController(mock.Object);
+            var controller = new AbsDataController(mockService.Object);
 
-            var model = (await controller.GetData(104, 1) as ViewResult)?.ViewData.Model as IEnumerable<Product>;
+            var model = (await controller.GetData(104, 1) as ViewResult)?.ViewData.Model as PopulationData;
         }
 
     }

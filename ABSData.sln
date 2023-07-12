@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ABSData", "ABSData\ABSData.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ABSDataFramework", "ABSDataFramework\ABSDataFramework.csproj", "{A32AFE7C-0E67-4A74-B291-BF56DA943BE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{1CD45EDA-0176-4A77-AADF-2A90EE46C4F8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{EC959EEB-F8FE-43C1-AD90-4CE64D18BD65}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{A32AFE7C-0E67-4A74-B291-BF56DA943BE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A32AFE7C-0E67-4A74-B291-BF56DA943BE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A32AFE7C-0E67-4A74-B291-BF56DA943BE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1CD45EDA-0176-4A77-AADF-2A90EE46C4F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1CD45EDA-0176-4A77-AADF-2A90EE46C4F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1CD45EDA-0176-4A77-AADF-2A90EE46C4F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1CD45EDA-0176-4A77-AADF-2A90EE46C4F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC959EEB-F8FE-43C1-AD90-4CE64D18BD65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC959EEB-F8FE-43C1-AD90-4CE64D18BD65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC959EEB-F8FE-43C1-AD90-4CE64D18BD65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC959EEB-F8FE-43C1-AD90-4CE64D18BD65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
