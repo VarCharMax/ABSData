@@ -62,11 +62,6 @@ namespace ABSData
             app.UseRouting();
             app.UseAuthorization();
 
-            if (!env.IsDevelopment())
-            {
-                app.UseSpaStaticFiles();
-            }
-
             app.UseEndpoints(endpoints => {
 
                 endpoints.MapControllerRoute(
@@ -80,25 +75,6 @@ namespace ABSData
             app.UseSwaggerUI(options => {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json",
                     "ABSData API");
-            });
-
-            app.UseSpa(spa =>
-            {
-                string strategy = Configuration.GetValue<string>("DevTools:ConnectionStrategy");
-
-                spa.Options.SourcePath = "ClientApp";
-
-                if (env.IsDevelopment())
-                {
-                    if (strategy == "proxy")
-                    {
-                        spa.UseProxyToSpaDevelopmentServer("http://127.0.0.1:4200");
-                    }
-                    else if (strategy == "managed")
-                    {
-                        spa.UseAngularCliServer(npmScript: "start");
-                    }
-                }
             });
 
             SeedData.SeedDatabase(services.GetRequiredService<ApplicationDbContext>());
