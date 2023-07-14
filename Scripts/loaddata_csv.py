@@ -227,7 +227,6 @@ insert_string_template = "INSERT INTO FactPopulation(Sexid, AgeCodeid, Stateid, 
 for row in dict_records_list:
     insert_string = "{}{},{},{},'{}','{}','{}',{},{},{}{}".format(insert_string_template, row["Sex"], row["Age"], row["State"], 
         row["REGIONTYPE"], row["Geography Level"], row["Region"], row["TIME"], row["Census year"], row["Value"], ");")
-    
     cursor.execute(insert_string) 
 
 cnxn.commit()
