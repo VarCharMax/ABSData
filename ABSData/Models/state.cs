@@ -1,6 +1,6 @@
 ﻿namespace ABSData.Models
 {
-    public class state
+    public class State
     {
         public long id { get; set; }
 

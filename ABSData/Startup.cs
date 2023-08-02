@@ -1,15 +1,8 @@
 using ABSDataFramework;
 using ABSDataFramework.Interfaces;
 using ABSDataFramework.Services;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using System;
 
 namespace ABSData
 {
@@ -26,7 +19,7 @@ namespace ABSData
         {
             string connectionString =
                 Configuration["ConnectionStrings:DefaultConnection"];
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContextFactory<ApplicationDbContext>(options =>
                 options.UseSqlServer(connectionString, b => b.MigrationsAssembly("ABSData")));
 
             services.AddTransient<IABSDataService, ABSDataService>();

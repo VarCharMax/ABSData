@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		}
+	],
+	"settings": {
+		"dotnet.defaultSolution": "ABSData.sln",
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.python"
+		},
+		"python.formatting.provider": "none"
+	},
+	"extensions": {
+		"recommendations": []
+	}
+}

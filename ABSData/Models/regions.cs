@@ -1,6 +1,6 @@
 ﻿namespace ABSData.Models
 {
-    public class region
+    public class Region
     {
         public long id { get; set; }
 
