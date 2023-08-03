@@ -3,6 +3,7 @@ using ABSDataFramework.Interfaces;
 using ABSDataFramework.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace ABSData
 {
@@ -26,7 +27,7 @@ namespace ABSData
 
             services.AddControllersWithViews()
                 .AddJsonOptions(opts => {
-                    opts.JsonSerializerOptions.IgnoreNullValues = true;
+                    opts.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
                 });
             services.AddRazorPages();
 
@@ -42,6 +43,7 @@ namespace ABSData
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                // SeedData.EnsurePopulated(new ProductDbContext());
             }
             else
             {
@@ -55,7 +57,7 @@ namespace ABSData
             app.UseRouting();
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => {
+            ;      app.UseEndpoints(endpoints => {
 
                 endpoints.MapControllerRoute(
                     name: "default",

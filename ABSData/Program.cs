@@ -1,20 +1,24 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+using ABSData;
 
-namespace ABSData
+var config = new ConfigurationBuilder()
+    .AddCommandLine(args)
+    .AddEnvironmentVariables()
+    .Build();
+
+if ((config["INITDB"] ?? "false") == "true")
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
+    Console.WriteLine("Preparing database ...");
+    // SeedData.EnsurePopulated(new ProductDbContext());
+    Console.WriteLine("Database preparation complete");
+}
+else
+{
+    Console.WriteLine("Starting ASP.NET...");
+    var host = new WebHostBuilder()
+    .UseConfiguration(config)
+    .UseContentRoot(Directory.GetCurrentDirectory())
+    .UseStartup<Startup>()
+    .Build();
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
-    }
+    host.Run();
 }
