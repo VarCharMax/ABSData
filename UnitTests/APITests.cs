@@ -69,7 +69,7 @@ namespace UnitTests
             //Test that api call returns a successful ActionResult
             var model = await controller.GetData(104, 1) as OkObjectResult;
 
-            //Test that object embeded in ActionResult has correct values.
+            //Test that object embedded in ActionResult has correct values.
             var result = model.Value as PopulationData;
 
             Assert.Equal("West Coast", result.RegionName);
